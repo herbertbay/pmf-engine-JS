@@ -1,0 +1,11 @@
+{
+  "name": "pmf-sdk",
+  "version": "1.0.0",
+  "description": "SDK for the Product Market Fit engine",
+  "main": "index.js",
+  "scripts": {
+    "test": "npx jest tests"
+  },
+  "author": "Marek Dajnowski",
+  "license": "MIT"
+}
