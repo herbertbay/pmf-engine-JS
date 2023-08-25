@@ -14,15 +14,32 @@ const api = async (endpoint, data) => {
 }
 
 class PMF {
+  /*
+   * @param {string} accountId - The ID of the account (optional but it has to be set before calling event)
+   * @param {object} options - User ID (optional but it has to be set before calling event)
+   */
   constructor (accountId, options) {
     this.accountId = accountId
     this.options = options
+
+    if(options && options.userId) {
+      this.userId = options.userId
+    }
   }
 
+  /*
+   * Sets the account ID
+   * @param {string} userId - The ID of the user (required)
+   */
   identify (userId) {
     this.userId = userId
+    return this
   }
 
+  /*
+   * Records an event
+   * @param {string} eventName - The name of the event (required)
+   */
   async event (eventName) {
     const data = {
       accountId: this.accountId,
@@ -30,9 +47,13 @@ class PMF {
       userId: this.userId
     }
 
-    return await api('eventRecord', data)
+    await api('eventRecord', data)
+    return this
   }
 
+  /*
+   * Gets the command for the user
+   */
   async getCommand () {
     const data = {
       accountId: this.accountId,
